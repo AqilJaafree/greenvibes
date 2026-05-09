@@ -39,8 +39,13 @@ export default function NewRequestPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, requester_wallet: publicKey }),
       });
+      if (!res.ok) {
+        const text = await res.text();
+        let msg = "Failed to create request";
+        try { msg = JSON.parse(text).error ?? msg; } catch { /* empty body */ }
+        throw new Error(msg);
+      }
       const json = await res.json();
-      if (!res.ok) throw new Error(json.error ?? "Failed to create request");
       router.push(`/requests/${json.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error");
