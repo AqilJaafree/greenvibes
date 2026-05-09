@@ -1,0 +1,16 @@
+"use client";
+
+import { SolanaProvider } from "@solana/react-hooks";
+import { PropsWithChildren } from "react";
+
+import { autoDiscover, createClient } from "@solana/client";
+
+const client = createClient({
+  endpoint:
+    process.env.NEXT_PUBLIC_SOLANA_RPC_URL ?? "https://api.mainnet-beta.solana.com",
+  walletConnectors: autoDiscover(),
+});
+
+export function Providers({ children }: PropsWithChildren) {
+  return <SolanaProvider client={client}>{children}</SolanaProvider>;
+}

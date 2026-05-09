@@ -1,0 +1,35 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+.next/
+out/
+dist/
+
+# Environment secrets — NEVER commit these
+.env
+.env.local
+.env.*.local
+
+# Claude Code — entire directory (agent configs, commands, session data, tokens)
+.claude/
+# MCP config (contains access tokens)
+.mcp.json
+# Superstack agentic context files
+.superstack/
+# Agent skill files
+.agents/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Skill lock and plugin manifest
+skills-lock.json
+.claude-plugin/
