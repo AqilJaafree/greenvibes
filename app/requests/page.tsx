@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export default async function RequestsPage() {
   const supabase = createServiceClient();
-  const { data: requests } = await supabase
+  const { data: requests, error } = await supabase
     .from("requests")
     .select("*")
     .eq("status", "open")
@@ -24,8 +24,13 @@ export default async function RequestsPage() {
         </Link>
       </div>
 
-      {!requests?.length ? (
-        <p className="text-gray-500 text-center py-20">No open requests yet.</p>
+      {error ? (
+        <div className="text-center py-20">
+          <p className="text-red-600 font-medium mb-1">Could not load requests</p>
+          <p className="text-xs text-gray-400 font-mono">{error.message}</p>
+        </div>
+      ) : !requests?.length ? (
+        <p className="text-gray-500 text-center py-20">No open requests yet. Be the first to ask!</p>
       ) : (
         <ul className="space-y-4">
           {(requests as HajjRequest[]).map((r) => (
@@ -57,5 +62,6 @@ export default async function RequestsPage() {
         </ul>
       )}
     </main>
+
   );
 }
