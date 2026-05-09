@@ -2,7 +2,7 @@ import Link from "next/link";
 import { createServiceClient } from "@/app/lib/supabase/server";
 import { HajjRequest } from "@/app/lib/types";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 export default async function RequestsPage() {
   const supabase = createServiceClient();

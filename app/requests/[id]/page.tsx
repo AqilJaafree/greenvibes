@@ -4,7 +4,7 @@ import { createServiceClient } from "@/app/lib/supabase/server";
 import { HajjRequest, Proof } from "@/app/lib/types";
 import CompleteButton from "./CompleteButton";
 
-export const revalidate = 30;
+export const dynamic = "force-dynamic";
 
 type RequestWithProof = HajjRequest & { proofs: Proof | null };
 
