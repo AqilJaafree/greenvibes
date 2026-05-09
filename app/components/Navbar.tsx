@@ -9,6 +9,10 @@ export default function Navbar() {
   const address = wallet?.account.address.toString();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const solanaConnectors = connectors.filter(
+    (c) => !c.name.toLowerCase().includes("brave")
+  );
+
   const short = address
     ? `${address.slice(0, 4)}…${address.slice(-4)}`
     : null;
@@ -53,7 +57,7 @@ export default function Navbar() {
               </button>
             </div>
           ) : (
-            connectors.slice(0, 1).map((c) => (
+            solanaConnectors.slice(0, 1).map((c) => (
               <button
                 key={c.id}
                 onClick={() => connect(c.id)}
@@ -93,7 +97,7 @@ export default function Navbar() {
               </button>
             </>
           ) : (
-            connectors.slice(0, 1).map((c) => (
+            solanaConnectors.slice(0, 1).map((c) => (
               <button key={c.id} onClick={() => connect(c.id)} className="block w-full text-left font-bold border-2 border-black px-3 py-2 text-sm bg-yellow-300">
                 Connect Wallet
               </button>
